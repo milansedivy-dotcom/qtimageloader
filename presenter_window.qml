@@ -11,9 +11,10 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    property url sourceFile;
 
         Image {
-            source: "file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
+            source: root.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
             id: image
 
             property real scaleFactor: 1

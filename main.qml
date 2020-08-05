@@ -13,19 +13,46 @@ Window {
 
 
     property url sourceFile;
+    property var sourceFiles;
+    property url sourceFolder;
 
     FileDialog {
-        id: fileDialog
+        id: multipleFilesDialog
 
         title: "Please choose a file"
         folder: shortcuts.home
-        selectMultiple: false
+        selectMultiple: true
         onAccepted: {
-           root.sourceFile = fileDialog.fileUrl;
-           //Qt.quit()
+            if (multipleFilesDialog.fileUrls.length > 1) {
+                root.sourceFiles = multipleFilesDialog.fileUrls;
+                console.log(root.sourceFiles);
+            }
+            else {
+                root.sourceFile = multipleFilesDialog.fileUrl;
+                var component = Qt.createComponent("presenter_window.qml")
+                component.createObject(ApplicationWindow, {sourceFile = root.sourceFile})
+                console.log(root.sourceFile);
+            }
            }
         onRejected: {
            Qt.quit()
+           }
+          //Component.onCompleted: visible = true
+    }
+
+    FileDialog {
+        id: selectFolderDialog
+
+        title: "Please choose a folder"
+        folder: shortcuts.home
+        selectFolder: true
+        onAccepted: {
+           root.sourceFolder = selectFolderDialog.folder;
+            console.log(root.sourceFolder);
+           //Qt.quit()
+        }
+        onRejected: {
+           //Qt.quit()
            }
           //Component.onCompleted: visible = true
     }
@@ -45,12 +72,13 @@ Window {
         Button {
             id: multipleFilesButton
             text: qsTr("Select File(s)")
-            onClicked: fileDialog.open();
+            onClicked: multipleFilesDialog.open();
         }
 
         Button {
             id: folderButton
             text: qsTr("Select Folder")
+            onClicked: selectFolderDialog.open();
         }
 
     }
