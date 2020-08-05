@@ -1,52 +1,36 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import QtQuick.Dialogs 1.2
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.12
 
 Window {
+    id: root
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
 
-        Image {
-            source: "file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
-            id: image
+    RowLayout {
 
-            property real scaleFactor: 1
-            property int positionX: 0
-            property int positionY: 0
+        id: menu
+        spacing: 10
 
-            transform: Scale {
-                yScale: image.scaleFactor;
-                xScale: image.scaleFactor;
-                origin.x: positionX;
-                origin.y: positionY;
-            }
+        anchors {
+            top: parent.top
+            left: parent.left
+            leftMargin: 20
+            topMargin: 15
+        }
 
-            anchors {
+        Button {
+            id: multipleFilesButton
+            text: qsTr("Select File(s)")
+        }
 
-            }
-
-            MouseArea {
-                id: mouseArea
-                anchors {
-                    fill: parent
-
-                }
-
-                onPositionChanged: {
-                    parent.positionX = mouseX;
-                    parent.positionY = mouseY;
-                }
-
-                onWheel: {
-                    if (wheel.modifiers & Qt.ControlModifier) {
-                        if (wheel.angleDelta.y > 0)
-                            parent.scaleFactor += 0.2;
-                        else if (parent.scaleFactor - 0.2 >= 0.2)
-                            parent.scaleFactor -= 0.2;
-
-                    }
-                }
+        Button {
+            id: folderButton
+            text: qsTr("Select Folder")
         }
 
     }
