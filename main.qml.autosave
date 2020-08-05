@@ -14,7 +14,7 @@ Window {
             property real scaleFactor: 1
             property int positionX: 0
             property int positionY: 0
-
+            
             transform: Scale {
                 yScale: image.scaleFactor;
                 xScale: image.scaleFactor;
@@ -23,16 +23,18 @@ Window {
             }
 
             anchors {
-
+                top: parent.top
+                left: parent.left
             }
 
             MouseArea {
                 id: mouseArea
                 anchors {
                     fill: parent
-
+                    top: parent.top
+                    left: parent.left
                 }
-
+                
                 onPositionChanged: {
                     parent.positionX = mouseX;
                     parent.positionY = mouseY;
