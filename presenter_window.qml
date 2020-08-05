@@ -11,27 +11,9 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
-    property url sourceFile;
-
-    FileDialog {
-        id: fileDialog
-        title: "Please choose a file"
-        folder: shortcuts.home
-        selectMultiple: false
-
-        onAccepted: {
-            root.sourceFile = fileDialog.fileUrl;
-            //Qt.quit()
-        }
-        onRejected: {
-            Qt.quit()
-        }
-        Component.onCompleted: visible = true
-    }
 
         Image {
-            //source: "file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
-            source: root.sourceFile
+            source: "file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
             id: image
 
             property real scaleFactor: 1

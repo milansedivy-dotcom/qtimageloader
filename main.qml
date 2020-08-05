@@ -11,6 +11,25 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+
+    property url sourceFile;
+
+    FileDialog {
+        id: fileDialog
+
+        title: "Please choose a file"
+        folder: shortcuts.home
+        selectMultiple: false
+        onAccepted: {
+           root.sourceFile = fileDialog.fileUrl;
+           //Qt.quit()
+           }
+        onRejected: {
+           Qt.quit()
+           }
+          //Component.onCompleted: visible = true
+    }
+
     RowLayout {
 
         id: menu
@@ -26,6 +45,7 @@ Window {
         Button {
             id: multipleFilesButton
             text: qsTr("Select File(s)")
+            onClicked: fileDialog.open();
         }
 
         Button {
