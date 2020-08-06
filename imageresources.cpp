@@ -4,3 +4,8 @@ ImageResources::ImageResources()
 {
 
 }
+
+QQmlListProperty<ImageData> ImageResources::sourceFiles()
+{
+
+}

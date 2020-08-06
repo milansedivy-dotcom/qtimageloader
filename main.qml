@@ -94,10 +94,7 @@ Window {
 
         TableViewColumn {
             title: "Files"
-            ListModel: sourceFiles
-            delegate: Text {
-                text: name
-            }
+
         }
         TableViewColumn {
             title: "Options"
