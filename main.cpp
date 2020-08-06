@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "qimageprovider.h"
+#include "qtimageprovider.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+    engine.addImageProvider(QLatin1String("myprovider"), new QtImageProvider);
     engine.load(url);
-    engine.addImageProvider(QLatin1String("provider"), new QtImageProvider);
 
     return app.exec();
 }

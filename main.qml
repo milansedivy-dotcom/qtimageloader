@@ -17,7 +17,7 @@ Window {
     property url sourceFolder;
 
     Image {
-        source: "image://provider/Phalaenopsis_JPEG.jpg"
+        source: "image://myprovider/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg"
     }
 
     FileDialog {

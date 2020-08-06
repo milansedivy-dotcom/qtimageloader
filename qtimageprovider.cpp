@@ -1,4 +1,4 @@
-#include "qimageprovider.h"
+#include "qtimageprovider.h"
 
 //QImageProvider::QImageProvider()
 //{
@@ -9,7 +9,7 @@ QImage QtImageProvider::requestImage(const QString &id, QSize* size, const QSize
 {
 //    int width = 320;
 //    int height = 320;
-    QString rsrcid = ":/" + id;
+    QString rsrcid = "file:" + id;
     QImage image(rsrcid);
     QImage result;
 
