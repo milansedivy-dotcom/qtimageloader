@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>presenter_window.qml</file>
+        <file>ImageControls.qml</file>
     </qresource>
 </RCC>

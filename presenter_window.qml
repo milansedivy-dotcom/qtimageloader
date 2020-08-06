@@ -1,5 +1,4 @@
 import QtQuick 2.0
-
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
@@ -40,7 +39,7 @@ Window {
                 drag.minimumX: -image.width/2*image.scaleFactor - translationProperties.x
                 drag.minimumY: -image.height/2*image.scaleFactor - translationProperties.y
                 drag.maximumX: root.width - image.width/2 *image.scaleFactor - translationProperties.x
-                drag.maximumY: root.height - image.height/2 *image.scaleFactor - translationProperties.y
+                drag.maximumY: root.height - image.height/2 *image.scaleFactor - translationProperties.y - imageControls.height*2
 
                 anchors {
                     fill: parent
@@ -63,6 +62,14 @@ Window {
                     }
                 }
         }
+    }
 
+    ImageControls {
+        id: imageControls
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+        }
+        onKeyPressed: console.log(index);
     }
 }
