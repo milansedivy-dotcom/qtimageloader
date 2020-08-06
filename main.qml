@@ -13,6 +13,8 @@ Window {
     visible: true
     width: 640
     height: 480
+    minimumWidth: menu.width*1.8
+    minimumHeight: 480
     title: qsTr("ImageViewer")
 
 
@@ -84,6 +86,9 @@ Window {
     }
 
     TableView {
+        id: tableView
+        height: root.height/2
+        width: root.width/1.3
 
         anchors {
             top: menu.bottom
@@ -94,10 +99,13 @@ Window {
 
         TableViewColumn {
             title: "Files"
-
+            width: tableView.width*(2/3)
+            resizable: false
         }
         TableViewColumn {
             title: "Options"
+            width: tableView.width*(1/3)-2
+            resizable: false
         }
     }
 }
