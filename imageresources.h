@@ -2,6 +2,7 @@
 #define IMAGERESOURCES_H
 
 #include <QObject>
+#include <QVector>
 #include <QQmlListProperty>
 #include "imagedata.h"
 
@@ -11,10 +12,14 @@ class ImageResources : public QObject
     Q_PROPERTY(QQmlListProperty<ImageData> sourceFiles READ sourceFiles)
 
 public:
-    ImageResources();
+    ImageResources(QObject *parent = nullptr);
     ~ImageResources() {}
 
     QQmlListProperty<ImageData> sourceFiles();
+    void appendImage(ImageData* imageData);
+
+private:
+    QVector<ImageData *> m_imageSourceList;
 };
 
 #endif // IMAGERESOURCES_H

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QRegularExpression>
 
 class ImageData : public QObject
 {
@@ -11,7 +12,8 @@ class ImageData : public QObject
     Q_PROPERTY(QString imageId READ imageId)
 
 public:
-    ImageData();
+    ImageData(QObject *parent = nullptr);
+    ImageData(QString imageSource, QString imageId);
     ~ImageData() {}
 
     void setImage(QString imageSource, QString imageId = NULL);
