@@ -20,6 +20,7 @@ public:
 
 private:
     QVector<ImageData *> m_imageSourceList;
+    static void appendImage(QQmlListProperty<ImageData>* list, ImageData* image);
 };
 
 #endif // IMAGERESOURCES_H
