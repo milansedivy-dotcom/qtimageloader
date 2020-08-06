@@ -7,14 +7,14 @@
 class ImageData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString imageSource READ imageSource WRITE setImageSource)
+    Q_PROPERTY(QString imageSource READ imageSource WRITE setImage)
     Q_PROPERTY(QString imageId READ imageId)
 
 public:
     ImageData();
     ~ImageData() {}
 
-    void setImageSource(QString imageSource);
+    void setImage(QString imageSource, QString imageId = NULL);
     QString imageSource();
     QString imageId();
 
