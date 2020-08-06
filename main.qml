@@ -82,4 +82,25 @@ Window {
         }
 
     }
+
+    TableView {
+
+        anchors {
+            top: menu.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: 20
+        }
+
+        TableViewColumn {
+            title: "Files"
+            ListModel: sourceFiles
+            delegate: Text {
+                text: name
+            }
+        }
+        TableViewColumn {
+            title: "Options"
+        }
+    }
 }
