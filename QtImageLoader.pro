@@ -15,7 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        qimageprovider.cpp
+        qtimageprovider.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,4 +34,4 @@ DISTFILES += \
     Phalaenopsis_JPEG.jpg
 
 HEADERS += \
-    qimageprovider.h
+    qtimageprovider.h

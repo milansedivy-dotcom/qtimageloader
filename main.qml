@@ -16,6 +16,10 @@ Window {
     property var sourceFiles;
     property url sourceFolder;
 
+    Image {
+        source: "image://provider/Phalaenopsis_JPEG.jpg"
+    }
+
     FileDialog {
         id: multipleFilesDialog
 
