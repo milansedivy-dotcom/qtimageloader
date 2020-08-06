@@ -9,7 +9,7 @@ QImage QtImageProvider::requestImage(const QString &id, QSize* size, const QSize
 {
 //    int width = 320;
 //    int height = 320;
-    QString rsrcid = "file:" + id;
+    QString rsrcid = id; //file:///
     QImage image(rsrcid);
     QImage result;
 

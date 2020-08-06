@@ -4,22 +4,22 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
 
-Window {
+Window {    
+    property string sourceFile;
+
     id: root
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
 
-    property url sourceFile;
-
         Image {
-            source: root.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
-            id: image
-
             property real scaleFactor: 1
             property real positionX: 1
             property real positionY: 1
+
+            source: "image://myprovider/" + root.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
+            id: image
 
             transform: [
                 Scale {

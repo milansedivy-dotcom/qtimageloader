@@ -5,20 +5,16 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.12
 
 Window {
+    property url sourceFile;
+    property var sourceFiles;
+    property url sourceFolder;
+
     id: root
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
 
-
-    property url sourceFile;
-    property var sourceFiles;
-    property url sourceFolder;
-
-    Image {
-        source: "image://myprovider/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg"
-    }
 
     FileDialog {
         id: multipleFilesDialog
@@ -34,7 +30,7 @@ Window {
             else {
                 root.sourceFile = multipleFilesDialog.fileUrl;
                 var component = Qt.createComponent("presenter_window.qml")
-                component.createObject(ApplicationWindow, {sourceFile = root.sourceFile})
+                component.createObject(ApplicationWindow, {sourceFile = root.sourceFile.toString().replace(/^(file:\/{2})/,"")})
                 console.log(root.sourceFile);
             }
            }
