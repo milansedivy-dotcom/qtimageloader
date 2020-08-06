@@ -6,6 +6,17 @@ import QtQuick.Dialogs 1.2
 Window {    
     property string sourceFile;
 
+    signal currentAngleChanged(int direction)
+
+    onCurrentAngleChanged: {
+        if (direction > 0)
+            image.currentAngle = (image.currentAngle + 90) % 360;
+        else
+            image.currentAngle = (image.currentAngle - 90) % 360;
+            console.log(image.currentAngle);
+    }
+
+
     id: root
     visible: true
     width: 640
@@ -14,8 +25,10 @@ Window {
 
         Image {
             property real scaleFactor: 1
+            property int currentAngle: 0
             property real positionX: 1
             property real positionY: 1
+
 
             source: "image://myprovider/" + root.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
             id: image
@@ -29,7 +42,14 @@ Window {
                     id: translationProperties
                     x: (root.width - image.width*image.scaleFactor)/2;
                     y: (root.height - image.height*image.scaleFactor)/2;
+                },
+                Rotation {
+                    id: rotationProperties
+                    angle: image.currentAngle
+                    origin.x: image.width/2+translationProperties.x // might not work with translation
+                    origin.y: image.height/2+translationProperties.y // might not work with translation
                 }
+
             ]
 //probably a better way to do this, but my brain froze
             MouseArea {
@@ -62,6 +82,7 @@ Window {
                     }
                 }
         }
+
     }
 
     ImageControls {
@@ -70,6 +91,13 @@ Window {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }
-        onKeyPressed: console.log(index);
+
+        onKeyPressed: {
+            console.log(index);
+            if (index == 2)
+                root.currentAngleChanged(-1);
+            else if (index == 3)
+                root.currentAngleChanged(1);
+        }
     }
 }
