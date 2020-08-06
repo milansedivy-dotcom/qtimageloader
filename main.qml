@@ -103,9 +103,20 @@ Window {
             resizable: false
         }
         TableViewColumn {
+            id: options
             title: "Options"
             width: tableView.width*(1/3)-2
             resizable: false
+        }
+    }
+
+    Button {
+        id: deleteAll
+        text: qsTr("Delete all")
+        anchors {
+            right: tableView.right
+            top: tableView.bottom
+            topMargin: 20
         }
     }
 }
