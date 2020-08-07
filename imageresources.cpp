@@ -41,11 +41,9 @@ void ImageResources::appendMultipleImages(const QList<QUrl> &imageList)
 
 void ImageResources::appendDirectory(QString dirUrl)
 {
-     qDebug() << "I've been summoned: " << dirUrl;
      QDirIterator file(dirUrl.remove("file://"));
      while (file.hasNext())
      {
-         qDebug() << file.fileName();
          if(file.fileName().endsWith(".jpg") || file.fileName().endsWith(".jpeg"))
          {
              ImageResources::appendImage(file.filePath());
@@ -81,6 +79,7 @@ void ImageResources::setCurrentIndex(int newIndex)
         else
             m_currentIndex = newIndex;
     }
+    emit currentIndexChanged(m_currentIndex);
 }
 
 //int ImageResources::rowCount(const QModelIndex &parent) const

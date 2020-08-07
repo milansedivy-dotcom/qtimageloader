@@ -16,6 +16,12 @@ Window {
             console.log(image.currentAngle);
     }
 
+    Connections{
+        target: _imageResources
+        onCurrentIndexChanged:{
+            image.source = "image://myprovider/" + _imageResources.sourceFiles[index].imageSource;
+        }
+    }
 
     id: root
     visible: true
@@ -94,6 +100,8 @@ Window {
 
         onKeyPressed: {
             console.log(index);
+            if (index == 1)
+                _imageResources.setCurrentIndex(_imageResources.currentIndex+1);
             if (index == 2)
                 root.currentAngleChanged(-1);
             else if (index == 3)
