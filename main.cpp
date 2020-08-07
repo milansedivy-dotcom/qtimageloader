@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 //    qRegisterMetaType<ImageData*>("ImageData");
 
     engine.rootContext()->setContextProperty("_imageResources", &imageResources);
-    imageResources.appendImage("/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg");
+ //   imageResources.appendImage("/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg");
 
     engine.addImageProvider(QLatin1String("myprovider"), new QtImageProvider);
     engine.load(url);

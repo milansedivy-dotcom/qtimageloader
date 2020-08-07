@@ -39,6 +39,11 @@ void ImageResources::appendMultipleImages(const QList<QUrl> &imageList)
     emit listChanged();
 }
 
+void ImageResources::appendDirectory()
+{
+
+}
+
 void ImageResources::deleteImage(int index)
 {
     m_imageSourceList.removeAt(index);
@@ -49,6 +54,22 @@ void ImageResources::deleteAll()
 {
     m_imageSourceList.clear();
     emit listChanged();
+}
+
+int ImageResources::currentIndex()
+{
+    return m_currentIndex;
+}
+
+void ImageResources::setCurrentIndex(int newIndex)
+{
+    if (m_currentIndex != newIndex)
+    {
+        if (newIndex == m_imageSourceList.size())
+            m_currentIndex = 0;
+        else
+            m_currentIndex = newIndex;
+    }
 }
 
 //int ImageResources::rowCount(const QModelIndex &parent) const

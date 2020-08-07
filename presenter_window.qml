@@ -4,7 +4,7 @@ import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
 
 Window {    
-    property string sourceFile;
+    //property string sourceFile;
 
     signal currentAngleChanged(int direction)
 
@@ -17,11 +17,11 @@ Window {
     }
 
 
-    id: root
+    id: imageWindow
     visible: true
     width: 640
     height: 480
-    title: qsTr("ImageViewer: ") + root.sourceFile
+    title: qsTr("ImageViewer: ") + _imageResources.sourceFiles[_imageResources.currentIndex].imageId
 
         Image {
             property real scaleFactor: 1
@@ -30,7 +30,7 @@ Window {
             property real positionY: 1
 
 
-            source: "image://myprovider/" + root.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
+            source: "image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource; //imageWindow.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
             id: image
 
             transform: [

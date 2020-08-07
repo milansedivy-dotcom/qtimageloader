@@ -7,9 +7,9 @@ import QtQuick.Layouts 1.12
 import qt.noob.imageData 1.0
 
 Window {
-    property url sourceFile;
-    property list<ImageData> sourceFiles;
-    property url sourceFolder;
+//    property url sourceFile;
+//    property list<ImageData> sourceFiles;
+//    property url sourceFolder;
 
     id: root
     visible: true
@@ -45,7 +45,6 @@ Window {
         onAccepted: {
             if (multipleFilesDialog.fileUrls.length > 1) {
                 _imageResources.appendMultipleImages(multipleFilesDialog.fileUrls);
-                console.log(root.sourceFiles);
             }
             else {
                 _imageResources.appendImage(multipleFilesDialog.fileUrl);
@@ -141,8 +140,10 @@ Window {
         }
 
         onDoubleClicked: {
+            //needs to be done differently
+            _imageResources.setCurrentIndex(row)
             var component = Qt.createComponent("presenter_window.qml")
-            component.createObject(ApplicationWindow, {sourceFile = _imageResources.sourceFiles[row].imageSource})
+            component.createObject(ApplicationWindow, {})
         }
     }
 
