@@ -41,16 +41,15 @@ Window {
         title: "Please choose a file"
         folder: shortcuts.home
         selectMultiple: true
+        nameFilters: ["*.jpg", "*.jpeg"]
         onAccepted: {
             if (multipleFilesDialog.fileUrls.length > 1) {
-                root.sourceFiles = multipleFilesDialog.fileUrls;
+                _imageResources.appendMultipleImages(multipleFilesDialog.fileUrls);
                 console.log(root.sourceFiles);
             }
             else {
-                root.sourceFile = multipleFilesDialog.fileUrl;
-                var component = Qt.createComponent("presenter_window.qml")
-                component.createObject(ApplicationWindow, {sourceFile = root.sourceFile.toString().replace(/^(file:\/{2})/,"")})
-                console.log(root.sourceFile);
+                _imageResources.appendImage(multipleFilesDialog.fileUrl);
+                //console.log(root.sourceFile);
             }
            }
         onRejected: {

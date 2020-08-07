@@ -28,6 +28,17 @@ void ImageResources::appendImage(QString imageData)
     emit listChanged();
 }
 
+
+void ImageResources::appendMultipleImages(const QList<QUrl> &imageList)
+{
+    QList<QUrl>::const_iterator i;
+    for (i = imageList.begin(); i != imageList.end(); i++)
+    {
+        ImageResources::appendImage(i->toString());
+    }
+    emit listChanged();
+}
+
 void ImageResources::deleteImage(int index)
 {
     m_imageSourceList.removeAt(index);

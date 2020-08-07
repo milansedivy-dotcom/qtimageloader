@@ -6,7 +6,9 @@
 #include <QVariant>
 #include <QQmlListProperty>
 #include <QAbstractListModel>
+#include <QUrl>
 #include "imagedata.h"
+
 
 
 
@@ -24,6 +26,7 @@ public:
 //    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 public slots:
+    void appendMultipleImages(const QList<QUrl> &);
     void appendImage(QString);
     void deleteImage(int);
     void deleteAll();
