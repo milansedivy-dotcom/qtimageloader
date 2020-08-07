@@ -3,12 +3,12 @@ import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.12
-import qt.noob.imageResources 1.0
+//import qt.noob.imageResources 1.0
 import qt.noob.imageData 1.0
 
 Window {
     property url sourceFile;
-    property var sourceFiles;
+    property list<ImageData> sourceFiles;
     property url sourceFolder;
 
     id: root
@@ -19,12 +19,11 @@ Window {
     minimumHeight: 480
     title: qsTr("ImageViewer")
 
-    Component.onCompleted: {
-        root.sourceFiles = _imageResources.sourceFiles;
-        console.log(root.sourceFiles);
-        console.log(_imageResources.imageData(0).imageSource);
-        console.log(_imageResources.imageData(0).imageId);
-    }
+//    Component.onCompleted: {
+//        root.sourceFiles = _imageResources.sourceFiles;
+//        console.log(_imageResources.sourceFiles[0].imageId);
+//        console.log(root.sourceFiles[0].imageSource);
+//    }
 
 //    ImageResources {
 //        id: temporaryStuff
@@ -107,6 +106,7 @@ Window {
         id: tableView
         height: root.height/2
         width: root.width/1.3
+        model: _imageResources.sourceFiles
 
         anchors {
             top: menu.bottom
@@ -119,22 +119,37 @@ Window {
             title: "Files"
             width: tableView.width*(2/3)
             resizable: false
+            role: "imageId"
         }
+
+
         TableViewColumn {
             id: options
             title: "Options"
             width: tableView.width*(1/3)-2
             resizable: false
+            delegate: ToolButton {
+                   id: deleteRow
+                   text: "Delete"
+                   onClicked: _imageResources.deleteImage(styleData.row);
+            }
+        }
+        Connections{
+            target: _imageResources
+            onListChanged:{
+                tableView.model = _imageResources.sourceFiles
+            }
         }
     }
 
     Button {
-        id: deleteAll
-        text: qsTr("Delete all")
+        id: populate
+        text: qsTr("Populate")
         anchors {
             right: tableView.right
             top: tableView.bottom
             topMargin: 20
         }
+        onClicked: tableView.model = _imageResources.sourceFiles;
     }
 }

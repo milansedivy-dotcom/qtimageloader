@@ -100,4 +100,18 @@ Window {
                 root.currentAngleChanged(1);
         }
     }
+
+    Rectangle {
+        id: timerWrapper
+        height: imageControls.height
+        width: 50
+        anchors {
+            right: imageControls.left
+            top: imageControls.top
+        }
+
+        Timer {
+            id: timer
+        }
+    }
 }

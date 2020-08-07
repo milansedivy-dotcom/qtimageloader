@@ -8,7 +8,6 @@
 int main(int argc, char *argv[])
 {
     ImageResources imageResources;
-    ImageData imageData;
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -23,14 +22,13 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
 
-    qmlRegisterType<ImageResources>("qt.noob.imageResources", 1, 0, "ImageResources");
+    //qmlRegisterType<ImageResources>("qt.noob.imageResources", 1, 0, "ImageResources");
     qmlRegisterType<ImageData>("qt.noob.imageData", 1, 0, "ImageData");
 //    qRegisterMetaType<ImageResources*>("ImageResources");
 //    qRegisterMetaType<ImageData*>("ImageData");
 
     engine.rootContext()->setContextProperty("_imageResources", &imageResources);
-    imageData.setImage("file:///home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg");
-    imageResources.appendImage(&imageData);
+    imageResources.appendImage("/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg");
 
     engine.addImageProvider(QLatin1String("myprovider"), new QtImageProvider);
     engine.load(url);

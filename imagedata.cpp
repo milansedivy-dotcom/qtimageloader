@@ -9,33 +9,35 @@ ImageData::ImageData(QString imageSource, QString imageId)
 {
     ImageData::setImage(imageSource, imageId);
 }
+ImageData::ImageData(QString imageSource)
+{
+    ImageData::setImage(imageSource);
+}
+ImageData::~ImageData()
+{
 
+}
 void ImageData::setImage(QString imageSource, QString imageId)
 {
-    qDebug() << "QREGEXP: " << imageSource.remove(QRegularExpression("/^(file:\/{2})/"));
-    qDebug() << "QREGEXP: " << imageSource.remove(QRegularExpression("file://"));
     if(imageId != NULL) {
         //Match 'file://' and remove it
         //m_imageSource = imageSource.remove(QRegularExpression("/^(file:\/{2})/")); <- no idea why this doesn't work, different regexp standard i guess
         m_imageSource = imageSource.remove(QRegularExpression("file://"));
         m_imageId = imageId;
-
-        qDebug() << m_imageSource;
     }
     else
     {
-        //Match everything up to and including the last slash '/' or backslash '\' (windows) and remove it
-        m_imageSource = imageSource.remove(QRegularExpression("file://"));
-        m_imageId = imageSource.remove(QRegularExpression("^(.*[\\\/])"));
+        //Either move regular expressions into a singleton OR use QMap::lowerBound
         //m_imageSource = imageSource.remove(QRegularExpression("/^(file:\/{2})/"));
-
-        qDebug() << m_imageSource;
+        m_imageSource = imageSource.remove(QRegularExpression("file://"));
+        //Match everything up to and including the last slash '/' or backslash '\' (windows) and remove it
+        m_imageId = imageSource.remove(QRegularExpression("^(.*[\\\/])"));
     }
 }
 
+
 QString ImageData::imageSource()
 {
-    qDebug() << m_imageSource;
     return m_imageSource;
 }
 

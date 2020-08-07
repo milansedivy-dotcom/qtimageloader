@@ -8,17 +8,21 @@
 class ImageData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString imageSource READ imageSource WRITE setImage)
-    Q_PROPERTY(QString imageId READ imageId)
+    Q_PROPERTY(QString imageSource READ imageSource WRITE setImage NOTIFY imageSourceChanged)
+    Q_PROPERTY(QString imageId READ imageId CONSTANT)
 
 public:
     ImageData(QObject *parent = nullptr);
     ImageData(QString imageSource, QString imageId);
-    ~ImageData() {}
-
+    ImageData(QString imageSource);
+    ~ImageData();
+//predelat na constat i imageSource (setter) a z setImage udelat public slot
     void setImage(QString imageSource, QString imageId = NULL);
     QString imageSource();
     QString imageId();
+
+signals:
+    void imageSourceChanged();
 
 private:
     QString m_imageId;
