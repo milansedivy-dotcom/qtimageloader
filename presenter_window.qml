@@ -40,8 +40,8 @@ Window {
                 },
                 Translate {
                     id: translationProperties
-                    x: (root.width - image.width*image.scaleFactor)/2;
-                    y: (root.height - image.height*image.scaleFactor)/2;
+                    x: (root.width - image.width*image.scaleFactor)/2 + (image.height - image.width)/2;
+                    y: (root.height - image.height*image.scaleFactor)/2 + (image.height - image.width)/2;
                 },
                 Rotation {
                     id: rotationProperties
