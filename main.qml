@@ -140,6 +140,11 @@ Window {
                 tableView.model = _imageResources.sourceFiles
             }
         }
+
+        onDoubleClicked: {
+            var component = Qt.createComponent("presenter_window.qml")
+            component.createObject(ApplicationWindow, {sourceFile = _imageResources.sourceFiles[row].imageSource})
+        }
     }
 
     Button {
