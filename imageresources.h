@@ -16,11 +16,15 @@ public:
     ~ImageResources() {}
 
     QQmlListProperty<ImageData> sourceFiles();
-    void appendImage(ImageData* imageData);
+public slots:
+    void appendImage(ImageData*);
+    ImageData* imageData(int) const;
+
 
 private:
     QVector<ImageData *> m_imageSourceList;
-    static void appendImage(QQmlListProperty<ImageData>* list, ImageData* image);
+    static void appendImage(QQmlListProperty<ImageData>*, ImageData*);
+    static ImageData* imageData(QQmlListProperty<ImageData>*, int);
 };
 
 #endif // IMAGERESOURCES_H

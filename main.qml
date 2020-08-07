@@ -3,6 +3,8 @@ import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.12
+import qt.noob.imageResources 1.0
+import qt.noob.imageData 1.0
 
 Window {
     property url sourceFile;
@@ -17,6 +19,22 @@ Window {
     minimumHeight: 480
     title: qsTr("ImageViewer")
 
+    Component.onCompleted: {
+        root.sourceFiles = _imageResources.sourceFiles;
+        console.log(root.sourceFiles);
+        console.log(_imageResources.imageData(0).imageSource);
+        console.log(_imageResources.imageData(0).imageId);
+    }
+
+//    ImageResources {
+//        id: temporaryStuff
+//        sourceFiles: [
+//            ImageData {imageSource: "/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg"}
+//        ]
+//        Component.onCompleted: {
+//            console.log(temporaryStuff.sourceFiles)//.imageData(0).imageSource);
+//        }
+//    }
 
     FileDialog {
         id: multipleFilesDialog
