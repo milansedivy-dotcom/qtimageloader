@@ -7,6 +7,8 @@
 #include <QQmlListProperty>
 #include <QAbstractListModel>
 #include <QUrl>
+#include <QDirIterator>
+#include <QDebug>
 #include "imagedata.h"
 
 
@@ -30,7 +32,7 @@ public:
 public slots:
     void appendMultipleImages(const QList<QUrl> &);
     void appendImage(QString);
-    void appendDirectory();
+    void appendDirectory(QString);
     void deleteImage(int);
     void deleteAll();
     void setCurrentIndex(int);

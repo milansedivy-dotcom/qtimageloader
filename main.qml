@@ -64,8 +64,7 @@ Window {
         folder: shortcuts.home
         selectFolder: true
         onAccepted: {
-           root.sourceFolder = selectFolderDialog.folder;
-            console.log(root.sourceFolder);
+           _imageResources.appendDirectory(selectFolderDialog.folder);
            //Qt.quit()
         }
         onRejected: {

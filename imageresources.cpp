@@ -39,9 +39,20 @@ void ImageResources::appendMultipleImages(const QList<QUrl> &imageList)
     emit listChanged();
 }
 
-void ImageResources::appendDirectory()
+void ImageResources::appendDirectory(QString dirUrl)
 {
-
+     qDebug() << "I've been summoned: " << dirUrl;
+     QDirIterator file(dirUrl.remove("file://"));
+     while (file.hasNext())
+     {
+         qDebug() << file.fileName();
+         if(file.fileName().endsWith(".jpg") || file.fileName().endsWith(".jpeg"))
+         {
+             ImageResources::appendImage(file.filePath());
+         }
+         file.next();
+     }
+     emit listChanged();
 }
 
 void ImageResources::deleteImage(int index)
