@@ -50,6 +50,11 @@ void ImageResources::appendDirectory(QString dirUrl)
          }
          file.next();
      }
+     //check and load last file
+     if(file.fileName().endsWith(".jpg") || file.fileName().endsWith(".jpeg"))
+     {
+         ImageResources::appendImage(file.filePath());
+     }
      emit listChanged();
 }
 

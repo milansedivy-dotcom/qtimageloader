@@ -123,10 +123,7 @@ Window {
             rightMargin: 20
         }
         text: qsTr(timer.time.toString())
-//        onEditingFinished: {
-//            timer.time = timerWrapper.text;
-//            console.log(timer.time);
-//        }
+
         validator: IntValidator{bottom: 1; top: 99}
         //inputMask: "D0"
 
