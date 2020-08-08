@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.12
 //import qt.noob.imageResources 1.0
@@ -144,16 +145,23 @@ Window {
             var component = Qt.createComponent("presenter_window.qml")
             component.createObject(ApplicationWindow, {})
         }
-    }
-
-    Button {
-        id: populate
-        text: qsTr("Populate")
-        anchors {
-            right: tableView.right
-            top: tableView.bottom
-            topMargin: 20
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.RightButton
+            onClicked: {
+                if (mouse.button == Qt.RightButton)
+                {
+                    contextMenu.popup();
+                }
+            }
         }
-        onClicked: tableView.model = _imageResources.sourceFiles;
+        Menu {
+            id: contextMenu
+            MenuItem {
+                text: "Delete ALL"
+                onTriggered: _imageResources.deleteAll();
+            }
+
+        }
     }
 }
