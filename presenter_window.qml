@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
 
 Window {    
@@ -100,26 +101,52 @@ Window {
 
         onKeyPressed: {
             console.log(index);
-            if (index == 1)
-                _imageResources.setCurrentIndex(_imageResources.currentIndex+1);
-            if (index == 2)
+            if (index == 0) {
+                timer.start();
+            }
+            else if (index == 1)
+                timer.stop();
+            else if (index == 2)
                 root.currentAngleChanged(-1);
             else if (index == 3)
                 root.currentAngleChanged(1);
         }
     }
 
-    Rectangle {
+    TextField {
         id: timerWrapper
         height: imageControls.height
         width: 50
         anchors {
             right: imageControls.left
             top: imageControls.top
+            rightMargin: 20
+        }
+        text: qsTr(timer.time.toString())
+//        onEditingFinished: {
+//            timer.time = timerWrapper.text;
+//            console.log(timer.time);
+//        }
+        validator: IntValidator{bottom: 1; top: 99}
+        //inputMask: "D0"
+
+        onEditingFinished: {
+            timer.time = timerWrapper.text;
+            console.log(timer.time);
+        }
+        onAccepted: {
+            timerWrapper.focus = false
+        //    timer.time = timerWrapper.text;
         }
 
+
         Timer {
+            property int time: 5
             id: timer
+            interval: time*1000; running: false; repeat: true
+                 onTriggered: {
+                     _imageResources.setCurrentIndex(_imageResources.currentIndex+1);
+                 }
         }
     }
 }
