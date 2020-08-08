@@ -14,7 +14,9 @@ Window {
             image.currentAngle = (image.currentAngle + 90) % 360;
         else
             image.currentAngle = (image.currentAngle - 90) % 360;
-            console.log(image.currentAngle);
+
+        _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation = image.currentAngle;
+        console.log(image.currentAngle);
     }
 
     Connections{
@@ -32,10 +34,13 @@ Window {
 
         Image {
             property real scaleFactor: 1
-            property int currentAngle: 0
+            property int currentAngle: _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation
             property real positionX: 1
             property real positionY: 1
 
+            Component.onCompleted: {
+                console.log("Rotace: " + _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation);
+            }
 
             source: "image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource; //imageWindow.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
             id: image
@@ -143,6 +148,7 @@ Window {
             interval: time*1000; running: false; repeat: true
                  onTriggered: {
                      _imageResources.setCurrentIndex(_imageResources.currentIndex+1);
+                     image.currentAngle = _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation;
                  }
         }
     }

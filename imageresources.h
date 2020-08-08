@@ -26,7 +26,7 @@ public:
 
     QQmlListProperty<ImageData> sourceFiles();
     int currentIndex();
-//    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    //    int rowCount(const QModelIndex &parent = QModelIndex()) const;
 //    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 public slots:

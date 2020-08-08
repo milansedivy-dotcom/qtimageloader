@@ -1,16 +1,19 @@
 #include "imagedata.h"
 #include <QDebug>
 
+
 ImageData::ImageData(QObject *parent)
 {
-
+    m_currentRotation = 0;
 }
 ImageData::ImageData(QString imageSource, QString imageId)
 {
+    m_currentRotation = 0;
     ImageData::setImage(imageSource, imageId);
 }
 ImageData::ImageData(QString imageSource)
 {
+    m_currentRotation = 0;
     ImageData::setImage(imageSource);
 }
 ImageData::~ImageData()
@@ -35,6 +38,16 @@ void ImageData::setImage(QString imageSource, QString imageId)
     }
 }
 
+void ImageData::setCurrentRotation(int newRotation)
+{
+    if (m_currentRotation != newRotation)
+        m_currentRotation = newRotation;
+}
+
+int ImageData::currentRotation()
+{
+    return m_currentRotation;
+}
 
 QString ImageData::imageSource()
 {
