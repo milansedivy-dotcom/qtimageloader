@@ -38,6 +38,11 @@ void ImageData::setImage(QString imageSource, QString imageId)
     }
 }
 
+void ImageData::setImageSource(QString newImageSource)
+{
+    m_imageSource = newImageSource.remove(QRegularExpression("file://"));
+}
+
 void ImageData::setCurrentRotation(int newRotation)
 {
     if (m_currentRotation != newRotation)

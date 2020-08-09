@@ -8,7 +8,7 @@
 class ImageData : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString imageSource READ imageSource WRITE setImage NOTIFY imageSourceChanged)
+    Q_PROPERTY(QString imageSource READ imageSource WRITE setImageSource NOTIFY imageSourceChanged)
     Q_PROPERTY(QString imageId READ imageId CONSTANT)
     Q_PROPERTY(int currentRotation READ currentRotation WRITE setCurrentRotation)
 
@@ -19,6 +19,7 @@ public:
     ~ImageData();
 //predelat na constat i imageSource (setter) a z setImage udelat public slot
     void setImage(QString imageSource, QString imageId = NULL);
+    void setImageSource(QString);
     QString imageSource();
     QString imageId();
     int currentRotation();
