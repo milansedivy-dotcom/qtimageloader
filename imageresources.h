@@ -9,6 +9,7 @@
 #include <QUrl>
 #include <QDirIterator>
 #include <QDebug>
+#include <exiv2/exiv2.hpp>
 #include "imagedata.h"
 
 

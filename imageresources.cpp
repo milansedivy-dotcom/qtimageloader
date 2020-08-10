@@ -30,6 +30,20 @@ void ImageResources::appendImage(QString imageData)
         m_imageSourceList.append(newData);
         emit listChanged();
     }
+    //temporary
+    Exiv2::Image::AutoPtr image = Exiv2::ImageFactory::open((newData->imageSource()).toStdString());
+    assert(image.get() != 0);
+    image->readMetadata();
+    Exiv2::ExifData &exifData = image->exifData();
+    if (exifData.empty())
+    {
+        qDebug() << "No Exif data found in file";
+    }
+    else
+    {
+        qDebug() << "I've found something";
+        qDebug() << "DateTime: " << QString::fromStdString(exifData["Exif.Image.DateTime"].toString());
+    }
 }
 
 
