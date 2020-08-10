@@ -7,6 +7,7 @@ import QtQuick.Layouts 1.12
 import qt.noob.imageData 1.0
 
 Window {
+    property bool viewerCreated: false
 
     id: root
     visible: true
@@ -15,6 +16,20 @@ Window {
     minimumWidth: menu.width*1.8
     minimumHeight: 480
     title: qsTr("ImageViewer")
+
+    PresenterWindow {
+        signal viewerStatusChanged
+
+        id: presenterWindow
+        visible: viewerCreated
+
+        onClosing: {
+            root.viewerCreated = false;
+        }
+        onViewerStatusChanged: {
+            presenterWindow.visible = root.viewerCreated;
+        }
+    }
 
     FileDialog {
         id: multipleFilesDialog
@@ -118,8 +133,14 @@ Window {
 
         onDoubleClicked: {
             _imageResources.setCurrentIndex(row)
-            var component = Qt.createComponent("presenter_window.qml")
-            component.createObject(ApplicationWindow, {})
+            viewerCreated = true;
+            presenterWindow.viewerStatusChanged();
+//            var component = Qt.createComponent("presenter_window.qml")
+//            if (!viewerCreated) {
+//                component.createObject(ApplicationWindow, {});
+//                component.destruction.connect({viewerCreated = false})
+//                viewerCreated = true;
+//            }
         }
         MouseArea {
             anchors.fill: parent

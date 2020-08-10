@@ -26,22 +26,21 @@ Window {
     }
 
     id: root
-    visible: true
     width: 640
     height: 480
-    title: qsTr("ImageViewer: ") + _imageResources.sourceFiles[_imageResources.currentIndex].imageId
+    title: if(root.visible){ qsTr("ImageViewer: ") + _imageResources.sourceFiles[_imageResources.currentIndex].imageId } else qsTr("")
 
         Image {
             property real scaleFactor: 1
-            property int currentAngle: _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation
+            property int currentAngle: if(root.visible){_imageResources.sourceFiles[_imageResources.currentIndex].currentRotation} else 0
             property real positionX: 1
             property real positionY: 1
 
             Component.onCompleted: {
-                console.log("Rotace: " + _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation);
+                //console.log("Rotace: " + _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation);
             }
 
-            source: "image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource;
+            source: if(root.visible){"image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource;} else ""
             id: image
 
             transform: [
