@@ -6,7 +6,7 @@ RowLayout {
     signal keyPressed(int index)
     Repeater {
         id: repeater
-        model: ["PLAY", "STOP", "ROTATE LEFT", "ROTATE RIGHT"]
+        model: ["PLAY", "STOP", "ROTATE LEFT", "ROTATE RIGHT", "CENTER"]
         Button {
             text: modelData
             onClicked: {

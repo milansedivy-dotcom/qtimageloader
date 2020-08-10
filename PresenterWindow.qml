@@ -40,13 +40,13 @@ Window {
     id: root
     width: 640
     height: 480
+    minimumHeight: 480
+    minimumWidth: 640
     title: if(root.visible){ qsTr("ImageViewer: ") + _imageResources.sourceFiles[_imageResources.currentIndex].imageId } else qsTr("")
 
         Image {
             property real scaleFactor: 1
             property int currentAngle: if(root.visible){_imageResources.sourceFiles[_imageResources.currentIndex].currentRotation} else 0
-            property real positionX: 1
-            property real positionY: 1
 
             source: if(root.visible){"image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource;} else ""
             id: image
@@ -66,12 +66,20 @@ Window {
                 Rotation {
                     id: rotationProperties
                     angle: image.currentAngle
-                    origin.x: image.width/2*image.scaleFactor+translationProperties.x//.x // might not work with translation
-                    origin.y: image.height/2*image.scaleFactor+translationProperties.y//.y // might not work with translation
+                    origin.x: image.width/2*image.scaleFactor+translationProperties.x
+                    origin.y: image.height/2*image.scaleFactor+translationProperties.y
                 }
 
 
             ]
+
+            function centerImage() {
+                console.log(translationProperties.x);
+                image.x = 0;
+                image.y = 0;
+
+            }
+
 
             function updateTranslation() {
                 translationProperties.x = (root.width - image.width*image.scaleFactor)/2;
@@ -101,20 +109,15 @@ Window {
                 id: mouseArea
                 drag.target: image
                 drag.axis: Drag.XAndYAxis
-                drag.minimumX: -image.width/2*image.scaleFactor - translationProperties.actualX//x
-                drag.minimumY: -image.height/2*image.scaleFactor - translationProperties.actualY//y
-                drag.maximumX: root.width - image.width/2 *image.scaleFactor - translationProperties.actualX//x
-                drag.maximumY: root.height - image.height/2 *image.scaleFactor - translationProperties.actualY/*y*/ - imageControls.height*2
+                drag.minimumX: -image.width/2*image.scaleFactor - translationProperties.actualX
+                drag.minimumY: -image.height/2*image.scaleFactor - translationProperties.actualY
+                drag.maximumX: root.width - image.width/2 *image.scaleFactor - translationProperties.actualX
+                drag.maximumY: root.height - image.height/2 *image.scaleFactor - translationProperties.actualY - imageControls.height*2
 
                 anchors {
                     fill: parent
                     top: parent.top
                     left: parent.left
-                }
-
-                onPositionChanged: {
-                    parent.positionX = mouseX;
-                    parent.positionY = mouseY;
                 }
 
                 onWheel: {
@@ -152,17 +155,21 @@ Window {
                 root.currentAngleChanged(-1);
             else if (index == 3)
                 root.currentAngleChanged(1);
+            else if (index == 4) {
+                image.centerImage();
+                root.currentAngleChanged(0);
+            }
         }
     }
 
     TextField {
         id: timerWrapper
         height: imageControls.height
-        width: 50
+        width: 45
         anchors {
             right: imageControls.left
             top: imageControls.top
-            rightMargin: 20
+            rightMargin: 5
         }
         text: qsTr(timer.time.toString())
 
