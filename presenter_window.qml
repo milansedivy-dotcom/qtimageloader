@@ -5,7 +5,6 @@ import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
 
 Window {    
-    //property string sourceFile;
 
     signal currentAngleChanged(int direction)
 
@@ -42,7 +41,7 @@ Window {
                 console.log("Rotace: " + _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation);
             }
 
-            source: "image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource; //imageWindow.sourceFile //"file:/home/vakokocurik/QTstarterProjects/QtImageLoader/Phalaenopsis_JPEG.jpg"
+            source: "image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource;
             id: image
 
             transform: [
@@ -63,7 +62,6 @@ Window {
                 }
 
             ]
-//probably a better way to do this, but my brain froze
             MouseArea {
                 id: mouseArea
                 drag.target: image
@@ -130,7 +128,6 @@ Window {
         text: qsTr(timer.time.toString())
 
         validator: IntValidator{bottom: 1; top: 99}
-        //inputMask: "D0"
 
         onEditingFinished: {
             timer.time = timerWrapper.text;
@@ -138,7 +135,6 @@ Window {
         }
         onAccepted: {
             timerWrapper.focus = false
-        //    timer.time = timerWrapper.text;
         }
 
 

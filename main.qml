@@ -4,13 +4,9 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.12
-//import qt.noob.imageResources 1.0
 import qt.noob.imageData 1.0
 
 Window {
-//    property url sourceFile;
-//    property list<ImageData> sourceFiles;
-//    property url sourceFolder;
 
     id: root
     visible: true
@@ -19,22 +15,6 @@ Window {
     minimumWidth: menu.width*1.8
     minimumHeight: 480
     title: qsTr("ImageViewer")
-
-//    Component.onCompleted: {
-//        root.sourceFiles = _imageResources.sourceFiles;
-//        console.log(_imageResources.sourceFiles[0].imageId);
-//        console.log(root.sourceFiles[0].imageSource);
-//    }
-
-//    ImageResources {
-//        id: temporaryStuff
-//        sourceFiles: [
-//            ImageData {imageSource: "/home/vakokocurik/Downloads/Phalaenopsis_JPEG.jpg"}
-//        ]
-//        Component.onCompleted: {
-//            console.log(temporaryStuff.sourceFiles)//.imageData(0).imageSource);
-//        }
-//    }
 
     FileDialog {
         id: multipleFilesDialog
@@ -49,13 +29,11 @@ Window {
             }
             else {
                 _imageResources.appendImage(multipleFilesDialog.fileUrl);
-                //console.log(root.sourceFile);
             }
            }
         onRejected: {
            Qt.quit()
            }
-          //Component.onCompleted: visible = true
     }
 
     FileDialog {
@@ -66,12 +44,11 @@ Window {
         selectFolder: true
         onAccepted: {
            _imageResources.appendDirectory(selectFolderDialog.folder);
-           //Qt.quit()
         }
         onRejected: {
-           //Qt.quit()
+           Qt.quit()
            }
-          //Component.onCompleted: visible = true
+
     }
 
     RowLayout {
@@ -140,7 +117,6 @@ Window {
         }
 
         onDoubleClicked: {
-            //needs to be done differently
             _imageResources.setCurrentIndex(row)
             var component = Qt.createComponent("presenter_window.qml")
             component.createObject(ApplicationWindow, {})
