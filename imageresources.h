@@ -46,6 +46,7 @@ private:
     int m_currentIndex;
     ImageData *m_newData;
     QList<ImageData*> m_imageSourceList;
+    QHash<QString, int> m_fileLookup;
     //static void appendImage(QQmlListProperty<ImageData>*, ImageData*);
     //static ImageData* imageData(QQmlListProperty<ImageData>*, int);
 };

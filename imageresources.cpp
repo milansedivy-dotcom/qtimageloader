@@ -23,8 +23,13 @@ QQmlListProperty<ImageData> ImageResources::sourceFiles()
 void ImageResources::appendImage(QString imageData)
 {
     ImageData* newData = new ImageData(imageData);
-    m_imageSourceList.append(newData);
-    emit listChanged();
+    if (m_fileLookup.contains(newData->imageSource())) {
+        delete newData;
+    } else {
+        m_fileLookup.insert(newData->imageSource(), m_imageSourceList.size());
+        m_imageSourceList.append(newData);
+        emit listChanged();
+    }
 }
 
 
@@ -59,6 +64,7 @@ void ImageResources::appendDirectory(QString dirUrl)
 
 void ImageResources::deleteImage(int index)
 {
+    m_fileLookup.remove(m_imageSourceList.at(index)->imageSource());
     m_imageSourceList.removeAt(index);
     emit listChanged();
 }
@@ -66,6 +72,7 @@ void ImageResources::deleteImage(int index)
 void ImageResources::deleteAll()
 {
     m_imageSourceList.clear();
+    m_fileLookup.clear();
     emit listChanged();
 }
 
