@@ -135,12 +135,7 @@ Window {
             _imageResources.setCurrentIndex(row)
             viewerCreated = true;
             presenterWindow.viewerStatusChanged();
-//            var component = Qt.createComponent("presenter_window.qml")
-//            if (!viewerCreated) {
-//                component.createObject(ApplicationWindow, {});
-//                component.destruction.connect({viewerCreated = false})
-//                viewerCreated = true;
-//            }
+
         }
         MouseArea {
             anchors.fill: parent

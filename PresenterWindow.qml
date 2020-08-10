@@ -36,10 +36,6 @@ Window {
             property real positionX: 1
             property real positionY: 1
 
-            Component.onCompleted: {
-                //console.log("Rotace: " + _imageResources.sourceFiles[_imageResources.currentIndex].currentRotation);
-            }
-
             source: if(root.visible){"image://myprovider/" + _imageResources.sourceFiles[_imageResources.currentIndex].imageSource;} else ""
             id: image
 
@@ -107,7 +103,9 @@ Window {
                 timer.start();
             }
             else if (index == 1)
+            {
                 timer.stop();
+            }
             else if (index == 2)
                 root.currentAngleChanged(-1);
             else if (index == 3)
